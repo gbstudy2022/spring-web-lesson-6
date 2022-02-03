@@ -1,4 +1,4 @@
-package com.geekbrains.spring.web.core.dto;
+package com.geekbrains.spring.web.cart.dto;
 
 import com.geekbrains.spring.web.core.entities.Product;
 import lombok.Data;
