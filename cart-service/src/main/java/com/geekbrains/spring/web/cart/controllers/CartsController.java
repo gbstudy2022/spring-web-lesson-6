@@ -16,11 +16,12 @@ public class CartsController {
 
     //получение айди корзины по юзернейму
     @GetMapping("/uuid")
-    public String getCartByUsername(@RequestHeader(required = true) String username) {
+    public String getCartByUsername(@RequestParam(required = true) String username) {
         return getCurrentCartUuid(username, null);
     }
 
-    //получение корзины
+    //получение корзины по uuid без префикса
+    //ЕСЛИ ПЫТАЕМСЯ ПОЛУЧИТЬ КОРЗИНУ ТИПА SPRING_WEB_bob, ТО НУЖНО ОТПРАВИТЬ В КАЧЕСТВЕ uuid ПРОСТО ИМЯ bob
     @GetMapping("/{uuid}")
     public Cart getCart(@RequestHeader(required = false) String username, @PathVariable String uuid) {
         return cartService.getCurrentCart(getCurrentCartUuid(username, uuid));

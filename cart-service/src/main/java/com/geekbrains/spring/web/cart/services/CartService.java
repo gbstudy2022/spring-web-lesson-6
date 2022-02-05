@@ -3,6 +3,7 @@ package com.geekbrains.spring.web.cart.services;
 import com.geekbrains.spring.web.api.dto.ProductDto;
 import com.geekbrains.spring.web.cart.dto.Cart;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,6 +15,7 @@ import java.util.function.Consumer;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CartService {
     @Autowired
     private RestTemplate restTemplate;
@@ -33,6 +35,7 @@ public class CartService {
     public Cart getCurrentCart(String cartKey) {
         if (!redisTemplate.hasKey(cartKey)) {
             redisTemplate.opsForValue().set(cartKey, new Cart());
+            log.info("created bucket for " + cartKey);
         }
         return (Cart) redisTemplate.opsForValue().get(cartKey);
     }
@@ -48,13 +51,13 @@ public class CartService {
         execute(cartKey, Cart::clear);
     }
 
-    public void removeItemFromCart(String cartKey, Long productId) {
-        execute(cartKey, c -> c.remove(productId));
-    }
-
-    public void decrementItem(String cartKey, Long productId) {
-        execute(cartKey, c -> c.decrement(productId));
-    }
+//    public void removeItemFromCart(String cartKey, Long productId) {
+//        execute(cartKey, c -> c.remove(productId));
+//    }
+//
+//    public void decrementItem(String cartKey, Long productId) {
+//        execute(cartKey, c -> c.decrement(productId));
+//    }
 
     public void merge(String userCartKey, String guestCartKey) {
         Cart guestCart = getCurrentCart(guestCartKey);

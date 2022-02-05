@@ -14,7 +14,23 @@ public class Cart {
         this.items = new ArrayList<>();
     }
 
-//    public void add(ProductDto product) {
+    public List<OrderItemDto> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItemDto> items) {
+        this.items = items;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    //    public void add(ProductDto product) {
 //        if (add(product.getId())) {
 //            return;
 //        }
