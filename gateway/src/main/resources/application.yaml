@@ -26,7 +26,7 @@ spring:
         - id: cart-service
           uri: http://localhost:8191/ #фактический адрес сервиса
           predicates:
-            - Path=/cart/** #клиент в запросе пишет http://localhost:5555/cart...- просит у гейтвея корзину
+            - Path=/cart/** #клиент в запросе пишет http://localhost:5555/cart...- просит у гейтвея что-то про корзину
           filters:
             - StripPrefix=1 #убираем первое после порта - /cart/
             - PrefixPath=/web-market-cart #сюда пойдет гейтвей -  http://localhost:8191/web-market-cart/тут прочие кусоки/если были/

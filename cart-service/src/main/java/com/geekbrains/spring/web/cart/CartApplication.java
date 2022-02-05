@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringWebApplication {
+public class CartApplication {
 	// Домашнее задание:
 	// 1. Разобраться с кодом
 	// 2-3. Попробовать вынести корзины в отдельный МС
@@ -12,6 +12,6 @@ public class SpringWebApplication {
 	// вопросов и проблем, которые не позволили полностью выполнить задачу
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringWebApplication.class, args);
+		SpringApplication.run(CartApplication.class, args);
 	}
 }
