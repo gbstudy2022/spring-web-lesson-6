@@ -68,6 +68,7 @@ public class Cart {
         }
     }
 
+    //забираем все из другой корзины и чистим ее
     public void merge(Cart another) {
         for (OrderItemDto anotherItem : another.items) {
             boolean merged = false;
