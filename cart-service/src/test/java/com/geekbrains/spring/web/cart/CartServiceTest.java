@@ -45,10 +45,25 @@ public class CartServiceTest extends AbstractSpringBootTest {
     }
 
     @Test
-    public void mergeCheck() {
+    public void mergeWithDifferentProductsCheck() {
         cartService.merge(cartKey, tempCartKey);
 
         Assertions.assertEquals(3, cartService.getCurrentCart(cartKey).getItems().size());
+        Assertions.assertEquals(0, cartService.getCurrentCart(tempCartKey).getItems().size());
+    }
+
+    @Test
+    public void mergeWithSameProductsCheck() {
+        Cart newTempCart = new Cart();
+        newTempCart.getItems().add(new OrderItemDto(1L,"TITLE1",4,100,400));
+        newTempCart.setTotalPrice(200);
+        redisTemplate.opsForValue().set(tempCartKey, newTempCart); //перезатерли временную из BeforeEach
+        cartService.merge(cartKey, tempCartKey);
+
+        Assertions.assertEquals(2, cartService.getCurrentCart(cartKey).getItems().size());
+        Assertions.assertEquals(5, cartService.getCurrentCart(cartKey).getItems().get(0).getQuantity());
+        Assertions.assertEquals(550, cartService.getCurrentCart(cartKey).getTotalPrice());
+
         Assertions.assertEquals(0, cartService.getCurrentCart(tempCartKey).getItems().size());
     }
 
